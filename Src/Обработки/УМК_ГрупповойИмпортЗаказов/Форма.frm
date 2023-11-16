@@ -144,7 +144,7 @@
 			״נטפע: Vrinda
 			{
 				״נטפע: Vrinda
-				׀אחלונ: 6
+				׀אחלונ: 5,5
 				Param10: 1
 				Param11: 2
 				Param12: 1
