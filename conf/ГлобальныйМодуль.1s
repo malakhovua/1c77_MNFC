@@ -17882,17 +17882,22 @@ EndFunction
 
 //==============================================Работа со скриптами =======================================
 
-Function run_script(script_txt, file_name) Export
+
+
+Function run_script(script_txt, file_name, ext = "bat", interp = "", intWindowStyle = 1, bWaitOnReturn = 1) Export
 	
 	wshshell= CreateObject("WScript.shell");
-	script_file = КаталогВременныхФайлов() + "\" + file_name + ".bat";
+	script_file = КаталогВременныхФайлов() + "\" + file_name + "." + ext;
 	
 	txt = СоздатьОбъект("Текст");
 	txt.ДобавитьСтроку(script_txt);
 	txt.Записать(script_file);
 	
-	Возврат wshshell.run(script_file);
+	result = wshshell.run(interp +?(ПустоеЗначение(interp) = 1,""," ") + script_file, intWindowStyle, bWaitOnReturn);
 
+	
+	return result
+	
 EndFunction
 
 //==============================================Конец работа со скриптами==================================
