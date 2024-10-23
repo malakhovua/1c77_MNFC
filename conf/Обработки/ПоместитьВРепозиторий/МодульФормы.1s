@@ -1,9 +1,9 @@
+Перем repo;
 //*******************************************
-Процедура Выполнить()
+Процедура compile_decompile_git_script()
 	
 	Если ИмяПользователя() = "Admin" Тогда
 		
-		repo = СокрЛП(Константа.repository_catalog) ;
 		md = КаталогИБ()  + "1Cv7.MD";
 		
 		Если ФС.СуществуетФайл(repo) = Ложь Тогда
@@ -20,8 +20,8 @@
 	
 	//Создаем скрипт и помещаем в файл.	
 	Сообщить("Создаем git-commit...");
-	wshshell= CreateObject("WScript.shell");
-	script_file = КаталогВременныхФайлов() + "\compile_decompile_git_script.bat";
+	
+	file_name ="\compile_decompile_git_script";
 	script_txt = "cd " + repo + "
 	|.\gcomp_bin_2.2.15\Release\gcomp.exe -vv  -d  -F .\1CV7.md -D .\conf
 	|del .\1CV7.md
@@ -30,11 +30,22 @@
 	|.\gcomp_bin_2.2.15\Release\gcomp.exe -vv  -c -F .\MD_compile\1Cv7.MD  -DD .\conf
 	|git push";
 	
-	txt = СоздатьОбъект("Текст");
-	txt.ДобавитьСтроку(script_txt);
-	txt.Записать(script_file);
+	errcode = run_script(script_txt, file_name);
 	
-	errcode= wshshell.run(script_file);
+КонецПроцедуры
+
+Процедура pull_compile() 
+
+	//Создаем скрипт и помещаем в файл.	
+	Сообщить("pull git...");
+	
+	file_name = "pull_compile";
+	script_txt = "cd " + repo + "
+	|git pull
+	|pause 5
+	|.\gcomp_bin_2.2.15\Release\gcomp.exe -vv  -c -F .\MD_compile\1Cv7.MD  -DD .\conf";
+	
+	errcode = run_script(script_txt, file_name);
 	
 КонецПроцедуры
 
@@ -49,3 +60,5 @@
 	Форма.repo_catalog.Заголовок("repo: "+ СокрЛП(Константа.repository_catalog) + "\1Cv7.MD");
 	
 КонецПроцедуры
+
+repo = СокрЛП(Константа.repository_catalog) ;
