@@ -3,7 +3,6 @@
 	
 	Если ИмяПользователя() = "Admin" Тогда
 		
-		
 		repo = СокрЛП(Константа.repository_catalog) ;
 		md = КаталогИБ()  + "1Cv7.MD";
 		
@@ -14,14 +13,28 @@
 		
 		ФС.КопироватьФайл(md,repo+"\1Cv7.MD",0);
 		
-		Сообщить("Файл конфигурации помещен в хранилище. " + Строка(ТекущаяДата()) + " " + Строка(ТекущееВремя()));
+		Сообщить("Файл конфигурации скопирован в каталог хранилищя. " + Строка(ТекущаяДата()) + " " + Строка(ТекущееВремя()));
 	Иначе
 		Сообщить("Недостаточно прав.");
 	КонецЕсли;
 	
-	Форма.Закрыть();
-
-	КомандаСистемы("explorer.exe; /select,"+СокрЛП(Константа.repository_catalog));
+	//Создаем скрипт и помещаем в файл.	
+	Сообщить("Создаем git-commit...");
+	wshshell= CreateObject("WScript.shell");
+	script_file = КаталогВременныхФайлов() + "\compile_decompile_git_script.bat";
+	script_txt = "cd " + repo + "
+	|.\gcomp_bin_2.2.15\Release\gcomp.exe -vv  -d  -F .\1CV7.md -D .\conf
+	|del .\1CV7.md
+	|git add .
+	|git commit 
+	|.\gcomp_bin_2.2.15\Release\gcomp.exe -vv  -c -F .\MD_compile\1Cv7.MD  -DD .\conf
+	|git push";
+	
+	txt = СоздатьОбъект("Текст");
+	txt.ДобавитьСтроку(script_txt);
+	txt.Записать(script_file);
+	
+	errcode= wshshell.run(script_file);
 	
 КонецПроцедуры
 
