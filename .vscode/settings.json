@@ -1,0 +1,8 @@
+{
+    "files.encoding": "windows1251",
+    "files.autoGuessEncoding": false,
+    "files.associations": {
+        "*.1s": "bsl",
+        "*.txt": "bsl"
+    }
+}
