@@ -95,3 +95,8 @@ Never write files with LF-only line endings — 1C 7.7 configurator requires CRL
 
 ### Comments
 Add comments to all edits you make with the mark - // + claude
+
+## Відомі помилки
+- При генерації коду використовувати тільки **кириличні** назви змінних.
+  Наприклад: `ДатаДок` (не `ДатаDok`), `ЕфДата`, `СкладКудиСтр` — все кирилицею.
+  1С 7.7 чутлива до змішування латиниці і кирилиці в іменах змінних.
