@@ -91,3 +91,7 @@ All .1s, .frm, .mdp, .ord files use Windows-1251 encoding with CRLF line endings
 3. Write back: `iconv -f UTF-8 -t CP1251 /tmp/<file>_utf8 | unix2dos > <original_file>`
 
 Never write files with LF-only line endings — 1C 7.7 configurator requires CRLF.
+
+
+### Comments
+Add comments to all edits you make with the mark - // + claude
