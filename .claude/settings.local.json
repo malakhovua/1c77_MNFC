@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(iconv -f CP1251 -t UTF-8 \"/home/alex/Downloads/1c77Project/1c77_MNFC/conf/Документы/Перемещение/МодульПроведения.1s\")",
+      "Bash(python3 *)",
+      "Bash(iconv -f UTF-8 -t UTF-8 /tmp/МодульПроведения_utf8.1s)",
+      "Bash(awk *)",
+      "Bash(xxd \"/home/alex/Downloads/1c77Project/1c77_MNFC/conf/Документы/Перемещение/МодульПроведения.1s\")",
+      "Bash(git -C \"/home/alex/Downloads/1c77Project/1c77_MNFC\" show HEAD:\"conf/Документы/Перемещение/МодульПроведения.1s\")",
+      "Bash(iconv -f UTF-8 -t CP1251 /tmp/МодульПроведения_utf8.1s)",
+      "Bash(unix2dos)"
+    ]
+  }
+}
