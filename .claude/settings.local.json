@@ -12,7 +12,11 @@
       "Bash(iconv -f CP1251 -t UTF-8 \"/home/alex/Documents/My_projects/1c77_MNFC/conf/Документы/Перемещение/МодульФормы.1s\")",
       "Bash(iconv -f CP1251 -t UTF-8 \"/home/alex/Documents/My_projects/1c77_MNFC/conf/Документы/ПереработкаМяса/Структура.mdp\")",
       "Bash(iconv -f CP1251 -t UTF-8 \"/home/alex/Documents/My_projects/1c77_MNFC/conf/Документы/Перемещение/Структура.mdp\")",
-      "Bash(iconv -f UTF-8 -t CP1251 /tmp/МодульФормыПерем_utf8.1s)"
+      "Bash(iconv -f UTF-8 -t CP1251 /tmp/МодульФормыПерем_utf8.1s)",
+      "Bash(iconv *)",
+      "Bash(grep -rn \"Документ\\\\.Перемещение\\\\|Перемещение\\\\.ТМЦ\\\\|Перемещение\\\\.Кво\\\\|\\\\$Перемещение\" /home/alex/Documents/My_projects/1c77_MNFC/conf/)",
+      "Bash(xxd)",
+      "Bash(git *)"
     ]
   }
 }
