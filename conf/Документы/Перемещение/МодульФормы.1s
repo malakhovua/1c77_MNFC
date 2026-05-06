@@ -1202,7 +1202,7 @@
 		|	INNER JOIN _1SJOURN AS Журнал ON Перем.IDDOC = Журнал.IDDOC
 		|	INNER JOIN $ДокументСтроки.Перемещение AS ПеремСтр ON ПеремСтр.IDDOC = Перем.IDDOC
 		|WHERE ($Перем.ДокументОснование = :ДокОснование~)
-		|	AND ((Журнал.CLOSED & 0x80) = 0)
+		|	AND ((Журнал.CLOSED & 1) = 1)
 		|	AND ($ПеремСтр.Кво > 0)
 		|GROUP BY $ПеремСтр.ТМЦ
 		|"; // + claude
