@@ -95,7 +95,7 @@ Never write files with LF-only line endings — 1C 7.7 configurator requires CRL
 
 
 ### Comments
-Add comments at the end of a block for conditions, loops, procedures, functions. At the end of specific variables and individual inserts. Edits you make with the mark - // + claude
+Add comments at the end of a block for conditions, loops, procedures, functions. At the end of specific variables. Edits you make with the mark - // + claude
 
 ## Відомі помилки
 - При генерації коду використовувати тільки **кириличні** назви змінних.
