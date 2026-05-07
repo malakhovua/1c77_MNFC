@@ -81,6 +81,7 @@ Food production and distribution company. Key functional areas:
 ## Language
 
 All code is in the 1C:Enterprise built-in language — a Russian-keyword procedural language. Variables, procedure names, and comments are in Russian (Cyrillic). The `gcomp.ini` setting `language: Rus` controls this.
+When generating the code, use name variables in russian.
 
 ## 1C 7.7 File Rules
 All .1s, .frm, .mdp, .ord files use Windows-1251 encoding with CRLF line endings (\r\n).
@@ -94,7 +95,7 @@ Never write files with LF-only line endings — 1C 7.7 configurator requires CRL
 
 
 ### Comments
-Add comments to all edits you make with the mark - // + claude
+Add comments at the end of a block for conditions, loops, procedures, functions. At the end of specific variables and individual inserts. Edits you make with the mark - // + claude
 
 ## Відомі помилки
 - При генерації коду використовувати тільки **кириличні** назви змінних.
@@ -103,6 +104,6 @@ Add comments to all edits you make with the mark - // + claude
   
 ## Правила синтаксису 1С 7.7
 ### Дужки в умовах
-Завжди використовувати дужки для кожної окремої умови в складених виразах:
+Завжди використовувати дужки для кожної окремої (якщо їх більше однієї) умови в складених виразах:
 - Правильно: `Если (ПустоеЗначение(Х)) = 0 И (Х > 0) Тогда`
 - Неправильно: `Если ПустоеЗначение(Х) = 0 И Х > 0 Тогда`

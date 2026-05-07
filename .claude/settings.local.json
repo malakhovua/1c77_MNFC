@@ -17,7 +17,8 @@
       "Bash(grep -rn \"Документ\\\\.Перемещение\\\\|Перемещение\\\\.ТМЦ\\\\|Перемещение\\\\.Кво\\\\|\\\\$Перемещение\" /home/alex/Documents/My_projects/1c77_MNFC/conf/)",
       "Bash(xxd)",
       "Bash(git *)",
-      "Bash(grep -v \"^--$\")"
+      "Bash(grep -v \"^--$\")",
+      "Bash(grep -v \"^$\")"
     ]
   }
 }
