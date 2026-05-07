@@ -18,7 +18,8 @@
       "Bash(xxd)",
       "Bash(git *)",
       "Bash(grep -v \"^--$\")",
-      "Bash(grep -v \"^$\")"
+      "Bash(grep -v \"^$\")",
+      "Bash(grep -n \"Документ\\\\|Dok\\\\|Дoк\\\\|\\\\$Документ\" /tmp/ВедомостьВзаимо_utf8.1s)"
     ]
   }
 }
