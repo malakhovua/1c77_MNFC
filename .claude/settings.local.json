@@ -1,25 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(iconv -f CP1251 -t UTF-8 \"/home/alex/Downloads/1c77Project/1c77_MNFC/conf/Документы/Перемещение/МодульПроведения.1s\")",
-      "Bash(python3 *)",
-      "Bash(iconv -f UTF-8 -t UTF-8 /tmp/МодульПроведения_utf8.1s)",
-      "Bash(awk *)",
-      "Bash(xxd \"/home/alex/Downloads/1c77Project/1c77_MNFC/conf/Документы/Перемещение/МодульПроведения.1s\")",
-      "Bash(git -C \"/home/alex/Downloads/1c77Project/1c77_MNFC\" show HEAD:\"conf/Документы/Перемещение/МодульПроведения.1s\")",
-      "Bash(iconv -f UTF-8 -t CP1251 /tmp/МодульПроведения_utf8.1s)",
-      "Bash(unix2dos)",
-      "Bash(iconv -f CP1251 -t UTF-8 \"/home/alex/Documents/My_projects/1c77_MNFC/conf/Документы/Перемещение/МодульФормы.1s\")",
-      "Bash(iconv -f CP1251 -t UTF-8 \"/home/alex/Documents/My_projects/1c77_MNFC/conf/Документы/ПереработкаМяса/Структура.mdp\")",
-      "Bash(iconv -f CP1251 -t UTF-8 \"/home/alex/Documents/My_projects/1c77_MNFC/conf/Документы/Перемещение/Структура.mdp\")",
-      "Bash(iconv -f UTF-8 -t CP1251 /tmp/МодульФормыПерем_utf8.1s)",
-      "Bash(iconv *)",
-      "Bash(grep -rn \"Документ\\\\.Перемещение\\\\|Перемещение\\\\.ТМЦ\\\\|Перемещение\\\\.Кво\\\\|\\\\$Перемещение\" /home/alex/Documents/My_projects/1c77_MNFC/conf/)",
-      "Bash(xxd)",
-      "Bash(git *)",
-      "Bash(grep -v \"^--$\")",
-      "Bash(grep -v \"^$\")",
-      "Bash(grep -n \"Документ\\\\|Dok\\\\|Дoк\\\\|\\\\$Документ\" /tmp/ВедомостьВзаимо_utf8.1s)"
+      "Bash(iconv -f CP1251 -t UTF-8 \"/home/alex/Documents/My_projects/1c77_MNFC/conf/ГлобальныйМодуль.1s\")",
+      "Read(//tmp/**)"
     ]
   }
 }
