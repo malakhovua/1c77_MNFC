@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(iconv -f CP1251 -t UTF-8 \"/home/alex/Documents/My_projects/1c77_MNFC/conf/ГлобальныйМодуль.1s\")",
-      "Read(//tmp/**)"
-    ]
-  }
-}
