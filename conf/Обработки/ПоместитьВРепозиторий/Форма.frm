@@ -44,7 +44,7 @@
 		}
 		BUTTON: 
 		{
-			Заголовок: "compile_decompile_git_script"
+			Заголовок: "decompile_push"
 			ИдентификаторМетаданных: -1
 			ДопФлаги: Flag0, Flag1, КартинкаПоЦентру, КнопкаПоУмолчанию, Flag28, Flag30
 			X: 10
