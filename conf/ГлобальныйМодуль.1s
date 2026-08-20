@@ -18423,8 +18423,8 @@ Function GetOrderByClientGroupCode(ClientIdCode, Orderdate) Export // + claude
 	
 	рс = СоздатьОбъект("ODBCRecordset");
 	ТекстЗапроса = "
-	|SELECT ЗаказКлиентаСтроки.ТМЦ [ТМЦ $Справочник.ТМЦ]
-	|	, Sum(ЗаказКлиентаСтроки.КвоПересчет) СуммаКвоПересчет
+	|SELECT $ЗаказКлиентаСтроки.ТМЦ [ТМЦ $Справочник.ТМЦ]
+	|	, Sum($ЗаказКлиентаСтроки.КвоПересчет) СуммаКвоПересчет
 	|FROM $ДокументСтроки.УМК_ЗаказКлиента AS ЗаказКлиентаСтроки
 	|	INNER JOIN _1SJOURN AS Журнал ON ЗаказКлиентаСтроки.IDDOC = Журнал.IDDOC
 	|	INNER JOIN $Документ.УМК_ЗаказКлиента AS ЗаказКлиента ON ЗаказКлиентаСтроки.IDDOC = ЗаказКлиента.IDDOC
@@ -18433,8 +18433,8 @@ Function GetOrderByClientGroupCode(ClientIdCode, Orderdate) Export // + claude
 	|WHERE (Родитель.CODE = :КодРодителя)
 	|	AND (Cast(Left(Журнал.DATE_TIME_IDDOC, 8) AS datetime) = :ДатаЗаказа)
 	|	AND ((Журнал.CLOSED & 1) = 1)
-	|GROUP BY ЗаказКлиентаСтроки.ТМЦ
-	|";
+	|GROUP BY $ЗаказКлиентаСтроки.ТМЦ
+	|"; // + claude
 	рс.УстановитьТекстовыйПараметр("КодРодителя", ClientIdCode);
 	рс.УстановитьТекстовыйПараметр("ДатаЗаказа", Orderdate);
 	
