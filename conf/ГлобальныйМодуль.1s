@@ -18434,8 +18434,9 @@ Function GetOrderByClientGroupCode(ClientIdCode, Orderdate) Export // + claude
 	|	AND (Cast(Left(Журнал.DATE_TIME_IDDOC, 8) AS datetime) = :ДатаЗаказа)
 	|	AND ((Журнал.CLOSED & 1) = 1)
 	|GROUP BY $ЗаказКлиентаСтроки.ТМЦ
+	|ORDER BY $ЗаказКлиентаСтроки.ТМЦ
 	|"; // + claude
-	рс.УстановитьТекстовыйПараметр("КодРодителя", ClientIdCode);
+	рс.УстановитьТекстовыйПараметр("КодРодителя", Число(ClientIdCode));
 	рс.УстановитьТекстовыйПараметр("ДатаЗаказа", Orderdate);
 	
 	Выборка = рс.ВыполнитьИнструкцию(ТекстЗапроса);
