@@ -18407,7 +18407,7 @@ Function GetOrderByNumber(Ordernum, Orderdate) Export
 	
 EndFunction
 
-//Функция возвращает сгруповані дані замовлень покупця по коду батьківського контрагента за день
+//Функция возвращает сгруповані дані замовлень покупця, контрагент яких входить в ієрархію групи з вказаним кодом, за день // + claude
 Function GetOrderByClientGroupCode(ClientIdCode, Orderdate) Export // + claude
 	
 	Результат = СоздатьОбъект("СписокЗначений");
@@ -18423,20 +18423,27 @@ Function GetOrderByClientGroupCode(ClientIdCode, Orderdate) Export // + claude
 	
 	рс = СоздатьОбъект("ODBCRecordset");
 	ТекстЗапроса = "
+	|WITH ИерархияГрупп (ID) AS (
+	|	SELECT ID FROM $Справочник.Контрагенты WHERE (CODE = :КодГрупи) AND (ISFOLDER = 1)
+	|	UNION ALL
+	|	SELECT Подгруппа.ID FROM $Справочник.Контрагенты AS Подгруппа
+	|		INNER JOIN ИерархияГрупп AS Верх ON Подгруппа.PARENTID = Верх.ID
+	|	WHERE (Подгруппа.ISFOLDER = 1)
+	|)
 	|SELECT $ЗаказКлиентаСтроки.ТМЦ [ТМЦ $Справочник.ТМЦ]
 	|	, Sum($ЗаказКлиентаСтроки.КвоПересчет) СуммаКвоПересчет
 	|FROM $ДокументСтроки.УМК_ЗаказКлиента AS ЗаказКлиентаСтроки
 	|	INNER JOIN _1SJOURN AS Журнал ON ЗаказКлиентаСтроки.IDDOC = Журнал.IDDOC
 	|	INNER JOIN $Документ.УМК_ЗаказКлиента AS ЗаказКлиента ON ЗаказКлиентаСтроки.IDDOC = ЗаказКлиента.IDDOC
 	|	INNER JOIN $Справочник.Контрагенты AS Контрагенты ON $ЗаказКлиента.Контрагент = Контрагенты.ID
-	|	INNER JOIN $Справочник.Контрагенты AS Родитель ON Контрагенты.PARENTID = Родитель.ID
-	|WHERE (Родитель.CODE = :КодРодителя)
+	|WHERE (Контрагенты.PARENTID IN (SELECT ID FROM ИерархияГрупп))
 	|	AND (Cast(Left(Журнал.DATE_TIME_IDDOC, 8) AS datetime) = :ДатаЗаказа)
 	|	AND ((Журнал.CLOSED & 1) = 1)
 	|GROUP BY $ЗаказКлиентаСтроки.ТМЦ
 	|ORDER BY $ЗаказКлиентаСтроки.ТМЦ
+	|OPTION (MAXRECURSION 100)
 	|"; // + claude
-	рс.УстановитьТекстовыйПараметр("КодРодителя", Число(ClientIdCode));
+	рс.УстановитьТекстовыйПараметр("КодГрупи", Число(ClientIdCode)); // + claude
 	рс.УстановитьТекстовыйПараметр("ДатаЗаказа", Orderdate);
 	
 	Выборка = рс.ВыполнитьИнструкцию(ТекстЗапроса);
