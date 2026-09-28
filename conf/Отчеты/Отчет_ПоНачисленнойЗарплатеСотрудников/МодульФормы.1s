@@ -298,6 +298,7 @@
 	
 	//Запрос по ручным корректировкам зп - операциям.
 	//Месяц берем из даты проводки (документа), период начисления ЗП (субконто) игнорируем - по всему отчету обороты считаем по датам документов // + claude
+	//Добавлена проверка CLOSED и ISMARK - без них в сумму попадала операция, помеченная на удаление, но все еще проведенная (задвоение суммы корректировки) // + claude
 
 	ТекстЗапроса =
 	"
@@ -309,7 +310,9 @@
 	|FROM _1SJOURN AS Журнал With (NOLOCK)
 	|	INNER JOIN $Документ.Операция AS Операция With (NOLOCK) ON Журнал.IDDOC = Операция.IDDOC
 	|	INNER JOIN _1SENTRY AS Проводки With (NOLOCK) ON Проводки.DOCID = Операция.IDDOC
-	|WHERE (Проводки.DATE_TIME_DOCID >= :ДатаНачала)
+	|WHERE ((Журнал.CLOSED & 1) = 1)
+	|	AND (Операция.ISMARK = 0)
+	|	AND (Проводки.DATE_TIME_DOCID >= :ДатаНачала)
 	|	AND (Проводки.DATE_TIME_DOCID <= :ДатаОкончания~)
 	|	AND (Проводки.ACCKTID = :СчетЗП)
 	|"
@@ -323,7 +326,9 @@
 	|FROM _1SJOURN AS Журнал With (NOLOCK)
 	|	INNER JOIN $Документ.Операция AS Операция With (NOLOCK) ON Журнал.IDDOC = Операция.IDDOC
 	|	INNER JOIN _1SENTRY AS Проводки With (NOLOCK) ON Проводки.DOCID = Операция.IDDOC
-	|WHERE (Проводки.DATE_TIME_DOCID >= :ДатаНачала)
+	|WHERE ((Журнал.CLOSED & 1) = 1)
+	|	AND (Операция.ISMARK = 0)
+	|	AND (Проводки.DATE_TIME_DOCID >= :ДатаНачала)
 	|	AND (Проводки.DATE_TIME_DOCID <= :ДатаОкончания~)
 	|	AND (Проводки.ACCDTID = :СчетЗП)
 	|"
