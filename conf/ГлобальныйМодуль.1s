@@ -18463,6 +18463,7 @@ Function GetOrderByPeriod(Дата1, Дата2) Export // + claude
 EndFunction
 
 //Функция возвращает сгруповані дані замовлень покупця, контрагент яких входить в ієрархію групи з вказаним кодом, за день // + claude
+//ClientIdCode может быть кодом группы (вся иерархия) или кодом элемента (сам контрагент) // + claude
 Function GetOrderByClientGroupCode(ClientIdCode, Orderdate) Export // + claude
 	
 	Результат = СоздатьОбъект("СписокЗначений");
@@ -18476,10 +18477,11 @@ Function GetOrderByClientGroupCode(ClientIdCode, Orderdate) Export // + claude
 		Возврат "[""err""]";
 	КонецПопытки;
 	
+	//Якорь CTE без ISFOLDER = 1 - по коду находим и группу, и элемент; в WHERE берем сам элемент (ID) или контрагентов из иерархии (PARENTID) // + claude
 	рс = СоздатьОбъект("ODBCRecordset");
 	ТекстЗапроса = "
 	|WITH ИерархияГрупп (ID) AS (
-	|	SELECT ID FROM $Справочник.Контрагенты WHERE (CODE = :КодГрупи) AND (ISFOLDER = 1)
+	|	SELECT ID FROM $Справочник.Контрагенты WHERE (CODE = :КодГрупи)
 	|	UNION ALL
 	|	SELECT Подгруппа.ID FROM $Справочник.Контрагенты AS Подгруппа
 	|		INNER JOIN ИерархияГрупп AS Верх ON Подгруппа.PARENTID = Верх.ID
@@ -18491,7 +18493,7 @@ Function GetOrderByClientGroupCode(ClientIdCode, Orderdate) Export // + claude
 	|	INNER JOIN _1SJOURN AS Журнал ON ЗаказКлиентаСтроки.IDDOC = Журнал.IDDOC
 	|	INNER JOIN $Документ.УМК_ЗаказКлиента AS ЗаказКлиента ON ЗаказКлиентаСтроки.IDDOC = ЗаказКлиента.IDDOC
 	|	INNER JOIN $Справочник.Контрагенты AS Контрагенты ON $ЗаказКлиента.Контрагент = Контрагенты.ID
-	|WHERE (Контрагенты.PARENTID IN (SELECT ID FROM ИерархияГрупп))
+	|WHERE ((Контрагенты.ID IN (SELECT ID FROM ИерархияГрупп)) OR (Контрагенты.PARENTID IN (SELECT ID FROM ИерархияГрупп)))
 	|	AND (Cast(Left(Журнал.DATE_TIME_IDDOC, 8) AS datetime) = :ДатаЗаказа)
 	|	AND ((Журнал.CLOSED & 1) = 1)
 	|GROUP BY $ЗаказКлиентаСтроки.ТМЦ
