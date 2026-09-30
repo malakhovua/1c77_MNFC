@@ -18556,7 +18556,7 @@ Function GetOrderByClientGroupCodePeriod(ClientIdCode, Дата1, Дата2) Export // +
 	|	INNER JOIN $Документ.УМК_ЗаказКлиента AS ЗаказКлиента ON ЗаказКлиентаСтроки.IDDOC = ЗаказКлиента.IDDOC
 	|	INNER JOIN $Справочник.Контрагенты AS Контрагенты ON $ЗаказКлиента.Контрагент = Контрагенты.ID
 	|WHERE ((Контрагенты.ID IN (SELECT ID FROM ИерархияГрупп)) OR (Контрагенты.PARENTID IN (SELECT ID FROM ИерархияГрупп)))
-	|	AND ($ЗаказКлиента.ДатаВх BETWEEN :Дата1 AND :Дата2)
+	|	AND ($ЗаказКлиента.ДатаНа BETWEEN :Дата1 AND :Дата2)
 	|	AND ((Журнал.CLOSED & 1) = 1)
 	|GROUP BY $ЗаказКлиентаСтроки.ТМЦ
 	|ORDER BY $ЗаказКлиентаСтроки.ТМЦ
