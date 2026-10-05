@@ -18496,6 +18496,7 @@ Function GetOrderByClientGroupCode(ClientIdCode, Orderdate) Export // + claude
 	|WHERE ((Контрагенты.ID IN (SELECT ID FROM ИерархияГрупп)) OR (Контрагенты.PARENTID IN (SELECT ID FROM ИерархияГрупп)))
 	|	AND (Cast(Left(Журнал.DATE_TIME_IDDOC, 8) AS datetime) = :ДатаЗаказа)
 	|	AND ((Журнал.CLOSED & 1) = 1)
+	|	AND ($ЗаказКлиента.Ф1 = 1)
 	|GROUP BY $ЗаказКлиентаСтроки.ТМЦ
 	|ORDER BY $ЗаказКлиентаСтроки.ТМЦ
 	|OPTION (MAXRECURSION 100)
@@ -18558,10 +18559,11 @@ Function GetOrderByClientGroupCodePeriod(ClientIdCode, Дата1, Дата2) Export // +
 	|WHERE ((Контрагенты.ID IN (SELECT ID FROM ИерархияГрупп)) OR (Контрагенты.PARENTID IN (SELECT ID FROM ИерархияГрупп)))
 	|	AND ($ЗаказКлиента.ДатаНа BETWEEN :Дата1 AND :Дата2)
 	|	AND ((Журнал.CLOSED & 1) = 1)
+	|	AND ($ЗаказКлиента.Ф1 = 1)
 	|GROUP BY $ЗаказКлиентаСтроки.ТМЦ
 	|ORDER BY $ЗаказКлиентаСтроки.ТМЦ
 	|OPTION (MAXRECURSION 100)
-	|";
+	|"; // + claude
 	рс.УстановитьТекстовыйПараметр("КодГруппы", Число(ClientIdCode));
 	рс.УстановитьТекстовыйПараметр("Дата1", Дата1);
 	рс.УстановитьТекстовыйПараметр("Дата2", Дата2);
