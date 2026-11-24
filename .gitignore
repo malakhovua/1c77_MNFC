@@ -1,3 +1,4 @@
 /log/
 /MD_compile/
 .claude/settings.local.json
+__pycache__/
